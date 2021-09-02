@@ -1,0 +1,6 @@
+@import "@hods/sass-base";
+@import "@not-govuk/panel";
+
+.hods-panel {
+  @extend .govuk-panel;
+}

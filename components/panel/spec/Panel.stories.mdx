@@ -1,0 +1,42 @@
+import { Meta, Preview, Props, Story } from '@not-govuk/docs-components';
+import { Panel } from '../src/Panel';
+import readMe from '../README.md';
+
+<Meta
+  title="panel"
+  component={ Panel }
+  parameters={ {
+    chromatic: { viewports: [640, 480] },
+    description: 'The panel component is a visible container used on confirmation or results pages to highlight important content.',
+    jest: ['Panel'],
+    notes: readMe
+  } }
+/>
+
+# panel
+
+The panel component is a visible container used on confirmation or results pages to highlight important content.
+WRITE MORE DESCRIPTION HERE.
+
+<Preview withToolbar>
+  <Story name="Panel">
+    <Panel />
+  </Story>
+</Preview>
+
+<Props of={ Panel } />
+
+
+## Stories
+### Standard
+
+A standard panel.
+
+<Preview>
+  <Story name="Standard">
+    <Panel title="Application complete">
+      Your reference number<br />
+      <strong>HDJ2123F</strong>
+    </Panel>
+  </Story>
+</Preview>
