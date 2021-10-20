@@ -1,0 +1,119 @@
+import { useState } from 'react';
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import Details from '../Details';
+import FormGroup from './FormGroup';
+import Tag from '../Tag';
+import Component from '../utils/Component';
+
+<Meta title="FormGroup" component={FormGroup} />
+
+# FormGroup
+
+<p><Tag text="Internal" /><Tag text="Draft" className="govuk-tag--red ml10" /></p>
+
+A group of form fields.
+
+<Canvas>
+  <Story name="Basic form group">
+    <FormGroup id="formGroup" label="Basic form group">
+      <input type="text" className="govuk-input" placeholder="Placeholder text..." />
+    </FormGroup>
+  </Story>
+</Canvas>
+
+<Details summary="Properties" textClass="no-indent">
+  <Props of={ FormGroup } />
+</Details>
+
+# Variants
+## Optional
+
+An optional Form group, which tracks changes as you type.
+
+<Canvas>
+  <Story name="Optional form group">
+    {() => {
+      const [value, setValue] = useState({ textFieldOptional: `Clear this out and we're all still fine` });
+      const [changes, setChanges] = useState([]);
+      const onChange = (key, value) => {
+        setValue(prev => {
+          const next = {
+            ...prev,
+            [key]: value
+          };
+          setChanges(prevChanges => {
+            return [...prevChanges, { ts: Date.now(), value: next }];
+          });
+          return next;
+        });
+      };
+      const groupOptions = {
+        id: 'idOptional',
+        label: 'Optional text field'
+      };
+      const componentOptions = {
+        ...groupOptions,
+        fieldId: 'textFieldOptional',
+        type: 'text',
+        formValue: value,
+        onChange
+      };
+      return (
+        <>
+          <FormGroup {...groupOptions}>
+            {Component.get(componentOptions)}
+          </FormGroup>
+          {changes && 
+            <Details summary="Change series" textClass="no-indent">
+              <ol>
+                {changes && changes.map(change => (
+                  <li>{JSON.stringify(change.value)}</li>
+                ))}
+              </ol>
+            </Details>
+          }
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Required
+
+A required Form group, with hint text, and an error message that displays when the the field is made blank.
+
+<Canvas>
+  <Story name="Required form group">
+    {() => {
+      const ERROR_MESSAGE = 'This field is required';
+      const [value, setValue] = useState({ textFieldRequired: 'Initial text' });
+      const [error, setError] = useState(null);
+      const onChange = (key, value) => {
+        setValue(prev => {
+          return {
+            ...prev,
+            [key]: value
+          };
+        });
+        setError(value === '' ? ERROR_MESSAGE : null);
+      };
+      const groupOptions = {
+        id: 'idRequired',
+        label: 'Required text field',
+        hint: 'Hint: Try clearing out the value',
+        required: true,
+        error
+      };
+      const componentOptions = {
+        ...groupOptions,
+        fieldId: 'textFieldRequired',
+        type: 'text',
+        formValue: value,
+        onChange
+      };
+      return <FormGroup {...groupOptions}>
+        {Component.get(componentOptions)}
+      </FormGroup>;
+    }}
+  </Story>
+</Canvas>
