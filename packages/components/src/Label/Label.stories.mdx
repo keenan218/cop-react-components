@@ -1,0 +1,71 @@
+import { useState } from 'react';
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import Details from '../Details';
+import Label from './Label';
+import Tag from '../Tag';
+import TextInput from '../TextInput';
+import Component from '../utils/Component';
+
+<Meta title="Label" component={ Label } />
+
+# Label
+
+<p><Tag text="Internal" /></p>
+
+A label for a form field.
+
+<Canvas>
+  <Story name="Label">
+    <form action="#" method="get">
+      <Label id="input-field">Optional field</Label>
+      <input className="govuk-input" id="input-field" />
+    </form>
+  </Story>
+</Canvas>
+
+<Details summary="Properties" textClass="no-indent">
+  <Props of={ Label } />
+</Details>
+
+# Variants
+## Required
+
+A required field is appropriately highlighted.
+
+<Canvas>
+  <Story name="Required label">
+    <form action="#" method="get">
+      <Label id="required-field" required={true}>Required field</Label>
+      <input className="govuk-input" id="required-field" />
+    </form>
+  </Story>
+</Canvas>
+
+## With markup
+A label field that contains markup.
+
+<Canvas>
+  <Story name="Markup">
+    <form action="#" method="get">
+      <Label id="markup-field" required={true}>
+        This is normal apart from the <strong>bold</strong> bit
+        and the <em>italic</em> bit (and the <a href="#">link</a>)
+      </Label>
+      <input className="govuk-input" id="markup-field" />
+    </form>
+  </Story>
+</Canvas>
+
+## Inline
+A label field that contains the field to which it refers.
+
+<Canvas>
+  <Story name="Inline">
+    <form action="#" method="get">
+      <Label id="inline-field">
+        Inline label
+        <input className="govuk-input" id="inline-field" />
+      </Label>
+    </form>
+  </Story>
+</Canvas>
