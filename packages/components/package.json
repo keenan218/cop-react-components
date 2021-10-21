@@ -1,5 +1,5 @@
 {
-  "name": "components",
+  "name": "@ukhomeoffice/cop-react-components",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
