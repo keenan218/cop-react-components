@@ -1,42 +1,37 @@
 import React from 'react';
 import { getByTestId, render } from '@testing-library/react';
-import Label from './Label';
+import Label, { OPTIONAL_SUFFIX } from './Label';
 
 describe('Label', () => {
 
-  const checkSetup = (container, testId, required) => {
+  const checkSetup = (container, testId) => {
     const label = getByTestId(container, testId);
     expect(label.getAttribute('for')).toEqual(testId);
     expect(label.classList).toContain('govuk-label');
-    if (required) {
-      expect(label.classList).toContain('field-required');
-    } else {
-      expect(label.classList).not.toContain('field-required');
-    }
     return label;
   };
 
-  it('should display the appropriate text in the label', async () => {
+  it('should include the suffix in an optional label', async () => {
     const LABEL_ID = 'opt';
     const LABEL_TEXT = 'Optional label';
     const { container } = render(
       <Label data-testid={LABEL_ID} id={LABEL_ID}>{LABEL_TEXT}</Label>
     );
-    const label = checkSetup(container, LABEL_ID, false);
-    expect(label.innerHTML).toEqual(LABEL_TEXT);
+    const label = checkSetup(container, LABEL_ID);
+    expect(label.innerHTML).toEqual(`${LABEL_TEXT}${OPTIONAL_SUFFIX}`);
   });
 
-  it('should have the appropriate CSS class set up when required', async () => {
+  it('should not include the suffix in a required label', async () => {
     const LABEL_ID = 'req';
     const LABEL_TEXT = 'Required label';
     const { container } = render(
       <Label data-testid={LABEL_ID} id={LABEL_ID} required={true}>{LABEL_TEXT}</Label>
     );
-    const label = checkSetup(container, LABEL_ID, true);
+    const label = checkSetup(container, LABEL_ID);
     expect(label.innerHTML).toEqual(LABEL_TEXT);
   });
 
-  it('should appropriately embed HTML as a child', async () => {
+  it('should appropriately embed HTML as a child in an optional label not include the suffix', async () => {
     const LABEL_ID = 'embed';
     const INNER_DIV_ID = 'inner-div';
     const INNER_DIV_TEXT = 'Inner div text';
@@ -46,9 +41,9 @@ describe('Label', () => {
     const { container } = render(
       <Label data-testid={LABEL_ID} id={LABEL_ID}>{LABEL_MARKUP}</Label>
     );
-    const label = checkSetup(container, LABEL_ID, false);
+    const label = checkSetup(container, LABEL_ID);
     const innerDiv = getByTestId(label, INNER_DIV_ID);
-    expect(innerDiv.innerHTML).toEqual(INNER_DIV_TEXT);
+    expect(innerDiv.innerHTML).toEqual(INNER_DIV_TEXT); // No suffix included.
   });
 
 });
