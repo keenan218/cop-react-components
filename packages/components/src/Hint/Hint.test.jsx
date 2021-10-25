@@ -1,5 +1,5 @@
 import React from 'react';
-import { getByTestId, queryByTestId, render } from '@testing-library/react';
+import { getByTestId, render } from '@testing-library/react';
 import Hint from './Hint';
 
 describe('Hint', () => {
