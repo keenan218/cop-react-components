@@ -24,7 +24,7 @@ Suppressing lint errors and warnings should only be done as a last resort and yo
 
 ### `yarn compile`
 
-Builds the component library for production to the `build` folder.\
+Builds the component library for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
