@@ -3,7 +3,6 @@ import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
 import Details from '../Details';
 import Panel from './Panel';
 import Tag from '../Tag';
-import './Panel.stories.scss';
 
 <Meta title="Panel" id="D-Panel" component={ Panel } />
 
@@ -24,16 +23,3 @@ The panel component is a visible container used on confirmation or results pages
 <Details summary="Properties" className="no-indent">
   <Props of={ Panel } />
 </Details>
-
-# Variants
-## With custom modifiers
-This is achievable by passing the `classModifiers` property (which defaults to `'confirmation'`) and
-having a corresponding CSS class for `.govuk-panel--your_modifier`.
-<Canvas>
-  <Story name="Custom modifiers">
-    <Panel title="There was a problem" classModifiers="error">
-      <p>Your request could not be processed at this time</p>
-      <strong>Please try again later</strong>
-    </Panel>
-  </Story>
-</Canvas>
