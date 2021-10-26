@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import { Canvas, Meta, Props, Story } from '@storybook/addon-docs';
 import Details from '../Details';
 import Label from './Label';
 import Tag from '../Tag';
 
 <Meta
-  id="D-LABEL-2021-11"
+  id="D-Label"
   title="Internal/Label"
   component={ Label }
 />
@@ -17,25 +17,36 @@ import Tag from '../Tag';
 A label for a form field.
 
 <Canvas>
-  <Story name="Label">
+  <Story name="Default">
     <form action="#" method="get">
-      <Label id="input-field">Optional field</Label>
-      <input className="govuk-input" id="input-field" />
+      <Label id="form-field">Form field</Label>
+      <input className="govuk-input" id="form-field" />
     </form>
   </Story>
 </Canvas>
 
-<Details summary="Properties" textClass="no-indent">
+<Details summary="Properties" className="no-indent">
   <Props of={ Label } />
 </Details>
 
 # Variants
-## Required
+## Optional
+An optional field has an `(optional)` suffix.
 
+<Canvas>
+  <Story name="Optional">
+    <form action="#" method="get">
+      <Label id="optional-field">Optional field</Label>
+      <input className="govuk-input" id="optional-field" />
+    </form>
+  </Story>
+</Canvas>
+
+## Required
 A required field displays without the `(optional)` suffix.
 
 <Canvas>
-  <Story name="Required label">
+  <Story name="Required">
     <form action="#" method="get">
       <Label id="required-field" required={true}>Required field</Label>
       <input className="govuk-input" id="required-field" />
