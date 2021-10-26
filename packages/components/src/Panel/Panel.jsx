@@ -1,29 +1,29 @@
-
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { classBuilder } from '../utils/Utils';
 import './Panel.scss';
 
-export const Panel = ({ children, className, title, ...attrs }) => {
-
-  return (
-    <div {...attrs} className={`govuk-panel govuk-panel--confirmation ${className}`}>
-      <h1 className="govuk-panel__title">{title}</h1>
-      <div className="govuk-panel__body">
-        {children}
-      </div>
+export const DEFAULT_CLASS = 'govuk-panel';
+export const Panel = ({ children, title, classBlock, classModifiers, className, ...attrs }) => {
+  const classes = classBuilder(classBlock, classModifiers, className);
+  return <div {...attrs} className={classes()}>
+    <h1 className={classes('title')}>{title}</h1>
+    <div className={classes('body')}>
+      {children}
     </div>
-  );
+  </div>;
 };
 
-// Panel.propTypes = {
-//   backgroundColor: PropTypes.string,
-//   label: PropTypes.string.isRequired,
-//   onClick: PropTypes.func,
-// };
+Panel.propTypes = {
+  title: PropTypes.string.isRequired,
+  classBlock: PropTypes.string,
+  classModifiers: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  className: PropTypes.string
+};
 
-// Panel.defaultProps = {
-//   backgroundColor: null,
-//   onClick: undefined,
-// };
+Panel.defaultProps = {
+  classBlock: DEFAULT_CLASS,
+  classModifiers: 'confirmation'
+};
 
 export default Panel;
