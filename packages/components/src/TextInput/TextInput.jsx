@@ -1,41 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { classBuilder, toArray } from '../utils/Utils';
 import './TextInput.scss';
 
+export const DEFAULT_CLASS = 'govuk-input';
 const TextInput = ({
   id,
   fieldId,
   disabled,
   error,
-  formValue,
-  onChange
+  classBlock,
+  classModifiers: _classModifiers,
+  className,
+  ...attrs
 }) => {
-  const [value, setValue] = useState('');
-  const BASE_CLASS = 'govuk-input';
-  const classes = () => {
-    if (error) {
-      return `${BASE_CLASS} ${BASE_CLASS}--error`;
-    }
-    return BASE_CLASS
-  };
-  const handleChange = (e) => {
-    if (typeof onChange === 'function') onChange(fieldId, e.target.value)
-  };
-  useEffect(() => {
-    console.log('TextInput.useEffect: formValue', formValue, 'fieldId', fieldId);
-    if (formValue && Object.keys(formValue).indexOf(fieldId) > -1) {
-      setValue(formValue[fieldId]);
-    }
-  }, [setValue, fieldId, formValue]);
+  const classModifiers = [...toArray(_classModifiers), error ? 'error' : undefined ];
+  const classes = classBuilder(classBlock, classModifiers, className);
   return (
     <input
+      {...attrs}
       disabled={disabled}
       id={id}
       name={fieldId}
       type="text"
       className={classes()}
-      value={value}
-      onChange={handleChange}
     />
   );
 };
@@ -45,9 +33,16 @@ TextInput.propTypes = {
   fieldId: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   error: PropTypes.string,
-  formValue: PropTypes.object,
-  onChange: PropTypes.func
+  classBlock: PropTypes.string,
+  classModifiers: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  className: PropTypes.string
 };
+
+TextInput.defaultProps = {
+  classBlock: DEFAULT_CLASS,
+  classModifiers: []
+};
+
 TextInput.displayName = 'TextInput';
 
 export default TextInput;
