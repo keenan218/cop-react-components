@@ -58,4 +58,12 @@ export const classBuilder = (block, blockModifiers, blockExtra) => {
     }
     return concatClasses(`${block}`, bModifiers?.filter(b => !!b).map(modifier => `${block}--${modifier}`), blockExtra);
   };
-}
+};
+
+const Utils = {
+  classBuilder,
+  interpolateString,
+  toArray
+};
+
+export default Utils;
