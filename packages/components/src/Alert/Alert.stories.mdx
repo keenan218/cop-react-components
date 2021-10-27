@@ -1,0 +1,47 @@
+import { useState } from 'react';
+import { Canvas, Meta, Props, Story } from '@storybook/addon-docs';
+import Details from '../Details';
+import Alert from './Alert';
+
+<Meta title="Alert" id="D-Alert" component={ Alert } />
+
+# Alert
+
+A block of text that is inset.
+
+<Canvas>
+  <Story name="Default">
+    <Alert heading="New passport">
+      We'll send your new passport by secure delivery. The cost is included in the passport fee.
+    </Alert>
+  </Story>
+</Canvas>
+
+<Details summary="Properties" className="no-indent">
+  <Props of={ Alert } />
+</Details>
+
+# Variants
+## Success
+
+Use the green version of the alert to confirm that something they’re expecting to happen has happened.
+
+<Canvas>
+  <Story name="Success">
+    <Alert heading="Payment successful" classModifiers="success">
+      We've sent details to test-email@test-corp.co.uk<br /><a href="#">Download confirmation</a>
+    </Alert>
+  </Story>
+</Canvas>
+
+## Error
+
+Use the red version of the alert to confirm that something has gone wrong.
+
+<Canvas>
+  <Story name="Error">
+    <Alert heading="Payment unsuccessful" classModifiers="error">
+      Please try again or contact our <a href="#">support team</a> for assistance.
+    </Alert>
+  </Story>
+</Canvas>
