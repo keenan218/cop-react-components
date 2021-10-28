@@ -4,6 +4,7 @@ import ErrorMessage from './ErrorMessage';
 import Hint from './Hint';
 import InsetText from './InsetText';
 import Label from './Label';
+import Link from './Link';
 import Panel from './Panel';
 import Tag from './Tag';
 import TextInput from './TextInput';
@@ -17,6 +18,7 @@ export {
   Hint,
   InsetText,
   Label,
+  Link,
   Panel,
   Tag,
   TextInput,
