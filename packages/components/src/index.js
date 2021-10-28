@@ -1,4 +1,6 @@
 import Alert from './Alert';
+import Button, { StartButton } from './Button';
+import ButtonGroup from './ButtonGroup';
 import Details from './Details';
 import ErrorMessage from './ErrorMessage';
 import Hint from './Hint';
@@ -13,6 +15,8 @@ import VisuallyHidden from './VisuallyHidden';
 
 export {
   Alert,
+  Button,
+  ButtonGroup,
   Details,
   ErrorMessage,
   Hint,
@@ -20,6 +24,7 @@ export {
   Label,
   Link,
   Panel,
+  StartButton,
   Tag,
   TextInput,
   Utils,
