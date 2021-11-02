@@ -1,0 +1,149 @@
+import { useState } from 'react';
+import { Canvas, Meta, Props, Story } from '@storybook/addon-docs';
+import Details from '../Details';
+import FormGroup from './FormGroup';
+import Tag from '../Tag';
+import TextInput from '../TextInput';
+
+<Meta title="Internal/Form group" component={ FormGroup } />
+
+# Form group
+
+<p><Tag text="Internal" /></p>
+
+A group of form fields.
+
+<Canvas>
+  <Story name="Default">
+    <FormGroup id="formGroup" label="Basic form group">
+      <input type="text" className="govuk-input" />
+    </FormGroup>
+  </Story>
+</Canvas>
+
+<Details summary="Properties" className="no-indent">
+  <Props of={ FormGroup } />
+</Details>
+
+# Variants
+## Optional
+
+An optional form group, which tracks changes as you type.
+
+<Canvas>
+  <Story name="Optional">
+    {() => {
+      const [value, setValue] = useState({});
+      const [changes, setChanges] = useState([]);
+      const onChange = ({ target }) => {
+        setValue(prev => {
+          const next = { ...prev, [target.name]: target.value };
+          setChanges(prevChanges => {
+            return [...prevChanges, { ts: Date.now(), value: next }];
+          });
+          return next;
+        });
+      };
+      const fieldId = 'textFieldOptional';
+      const groupOptions = {
+        id: 'idOptional',
+        label: 'Optional text field'
+      };
+      const componentOptions = {
+        ...groupOptions,
+        fieldId,
+        type: 'text',
+        value: value[fieldId] || '',
+        onChange
+      };
+      return (
+        <>
+          <FormGroup {...groupOptions}>
+            <TextInput {...componentOptions} />
+          </FormGroup>
+          {changes && 
+            <Details summary="Change series" className="no-indent">
+              <ol>
+                {changes && changes.map(change => (
+                  <li key={change.ts}>{JSON.stringify(change.value)}</li>
+                ))}
+              </ol>
+            </Details>
+          }
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Required
+
+A required form group, with hint text.
+
+<Canvas>
+  <Story name="Required">
+    {() => {
+      const [value, setValue] = useState({});
+      const onChange = ({ target }) => {
+        setValue(prev => {
+          return { ...prev, [target.name]: target.value };
+        });
+      };
+      const fieldId = 'textFieldRequired';
+      const groupOptions = {
+        id: 'idRequired',
+        label: 'Mandatory text field',
+        hint: 'Hint: This field is required',
+        required: true
+      };
+      const componentOptions = {
+        ...groupOptions,
+        fieldId,
+        type: 'text',
+        value: value[fieldId] || '',
+        onChange
+      };
+      return <FormGroup {...groupOptions}>
+        <TextInput {...componentOptions} />
+      </FormGroup>;
+    }}
+  </Story>
+</Canvas>
+
+## Error
+
+A required form group, with hint text, that will show an error when it is empty.
+
+<Canvas>
+  <Story name="Error">
+    {() => {
+      const ERROR_MESSAGE = 'Mandatory text field is required';
+      const [value, setValue] = useState({});
+      const [error, setError] = useState(ERROR_MESSAGE);
+      const onChange = ({ target }) => {
+        setValue(prev => {
+          setError(target.value ? undefined : ERROR_MESSAGE);
+          return { ...prev, [target.name]: target.value };
+        });
+      };
+      const fieldId = 'textFieldError';
+      const groupOptions = {
+        id: 'idRequired',
+        label: 'Mandatory text field',
+        hint: <span>This field will <strong>only</strong> show an error message if it is left blank</span>,
+        required: true,
+        error
+      };
+      const componentOptions = {
+        ...groupOptions,
+        fieldId,
+        type: 'text',
+        value: value[fieldId] || '',
+        onChange
+      };
+      return <FormGroup {...groupOptions}>
+        <TextInput {...componentOptions} />
+      </FormGroup>;
+    }}
+  </Story>
+</Canvas>
