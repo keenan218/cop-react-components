@@ -1,0 +1,24 @@
+import { useState } from 'react';
+import { Meta, Props, Story, Canvas } from '@storybook/addon-docs';
+import Details from '../Details';
+import Panel from './Panel';
+
+<Meta title="Panel" id="D-Panel" component={ Panel } />
+
+# Panel
+
+The panel component is a visible container used on confirmation or results pages to highlight important content.
+
+<Canvas>
+  <Story name="Default">
+    <Panel title="Application complete">
+      Your reference number
+      <br />
+      <strong>HDJ2123F</strong>
+    </Panel>
+  </Story>
+</Canvas>
+
+<Details summary="Properties" className="no-indent">
+  <Props of={ Panel } />
+</Details>
