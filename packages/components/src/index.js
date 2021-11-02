@@ -1,6 +1,7 @@
 import Alert from './Alert';
 import Details from './Details';
 import InsetText from './InsetText';
+import Label from './Label';
 import Panel from './Panel';
 import Tag from './Tag';
 import TextInput from './TextInput';
@@ -10,6 +11,7 @@ export {
   Alert,
   Details,
   InsetText,
+  Label,
   Panel,
   Tag,
   TextInput,
