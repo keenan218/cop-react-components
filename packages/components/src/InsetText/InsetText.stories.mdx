@@ -1,0 +1,38 @@
+import { useState } from 'react';
+import { Canvas, Meta, Props, Story } from '@storybook/addon-docs';
+import Details from '../Details';
+import InsetText from './InsetText';
+
+<Meta title="InsetText" id="D-InsetText" component={ InsetText } />
+
+# Inset text
+
+A block of text that is inset.
+
+<Canvas>
+  <Story name="Default">
+    <InsetText>
+      The changes will show in your profile when they accept your request.
+    </InsetText>
+  </Story>
+</Canvas>
+
+<Details summary="Properties" className="no-indent">
+  <Props of={ InsetText } />
+</Details>
+
+# Variants
+## With markup
+
+A block of markup that is inset, showing it supports something other than plain text.
+
+<Canvas>
+  <Story name="Markup">
+    <InsetText>
+      <ol>
+        <li>Check your answers carefully</li>
+        <li>Don't make a mistake</li>
+      </ol>
+    </InsetText>
+  </Story>
+</Canvas>
