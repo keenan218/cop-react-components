@@ -72,6 +72,7 @@ describe('Autocomplete', () => {
           { id: 'C', name: 'cherry' },
           { id: 'D', name: 'DURIAN' }
         ];
+        // eslint-disable-next-line no-template-curly-in-string
         const STRUCTURE = { format: '${id} - ${name}' };
         const RESULT = getFilterFunction(SOURCE, STRUCTURE);
         expect(RESULT).toBeInstanceOf(Function);
@@ -122,6 +123,7 @@ describe('Autocomplete', () => {
         expect(RESULT.suggestion({ forename: 'Mary', surname: 'Sue' })).toEqual('');
       });
       it('should return the appropriate value, based on the structure format', () => {
+        // eslint-disable-next-line no-template-curly-in-string
         const STRUCTURE = { format: '${forename} ${surname}' };
         const RESULT = getTemplates(undefined, STRUCTURE);
         checkValidTemplates(RESULT);
