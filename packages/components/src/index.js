@@ -2,6 +2,7 @@ import Alert from './Alert';
 import Button, { StartButton } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Details from './Details';
+import FormGroup from './FormGroup';
 import ErrorMessage from './ErrorMessage';
 import Hint from './Hint';
 import InsetText from './InsetText';
@@ -19,6 +20,7 @@ export {
   ButtonGroup,
   Details,
   ErrorMessage,
+  FormGroup,
   Hint,
   InsetText,
   Label,
