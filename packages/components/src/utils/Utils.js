@@ -4,7 +4,7 @@ const getObjPath = (path, obj, fallback = '') => {
   return path.split('.').reduce((res, key) => res[key] || fallback, obj);
 };
 
-const concatClasses = (...classes) => {
+export const concatClasses = (...classes) => {
   return classes.flat(Infinity).filter(cs => !!cs).join(' ') || undefined;
 };
 
