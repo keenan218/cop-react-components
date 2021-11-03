@@ -178,8 +178,8 @@ describe('Autocomplete', () => {
       fieldId: AUTOCOMPLETE_FIELD_ID,
       source: SOURCE,
       item: STRUCTURE,
-      onChange: (item) => {
-        selection = item;
+      onChange: (e) => {
+        selection = e.target.value;
       }
     };
     const { container } = render(

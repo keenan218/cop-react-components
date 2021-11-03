@@ -9,6 +9,7 @@ import { TextInput } from '..';
 export const DEFAULT_CLASS = 'hods-autocomplete';
 const Autocomplete = ({
   id,
+  fieldId,
   disabled,
   error,
   source,
@@ -35,12 +36,19 @@ const Autocomplete = ({
   const onConfirm = (item) => {
     value = item;
     if (typeof onChange === 'function') {
-      onChange(value);
+      onChange({ target: { name: fieldId, value } });
     }
   };
   return (
     <div className={`${DEFAULT_CLASS}__outer-wrapper ${className ?? ''}`}>
-      {disabled && <TextInput {...attrs} id={id} value={templates.inputValue(value)} disabled error={error} />}
+      {disabled && <TextInput
+        {...attrs}
+        id={id}
+        fieldId={fieldId}
+        value={templates.inputValue(value)}
+        disabled
+        error={error}
+      />}
       {!disabled && <AlphaAutocomplete
         ref={aacRef}
         {...attrs}
@@ -59,6 +67,7 @@ const Autocomplete = ({
 
 Autocomplete.propTypes = {
   id: PropTypes.string,
+  fieldId: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.string,
   /** A list of items or a function that takes a query and callback method, which is called with the resultant list of items. */

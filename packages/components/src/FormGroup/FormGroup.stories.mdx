@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Canvas, Meta, Props, Story } from '@storybook/addon-docs';
+import Autocomplete from '../Autocomplete/Autocomplete';
+import { CountriesByName } from '../Autocomplete/Countries.stories';
 import Details from '../Details';
 import FormGroup from './FormGroup';
 import Tag from '../Tag';
@@ -78,7 +80,7 @@ An optional form group, which tracks changes as you type.
 
 ## Required
 
-A required form group, with hint text.
+A required form group, with hint text, and an autocomplete field.
 
 <Canvas>
   <Story name="Required">
@@ -89,22 +91,23 @@ A required form group, with hint text.
           return { ...prev, [target.name]: target.value };
         });
       };
-      const fieldId = 'textFieldRequired';
+      const fieldId = 'autocompleteFieldRequired';
       const groupOptions = {
         id: 'idRequired',
-        label: 'Mandatory text field',
+        label: 'Mandatory autocomplete field',
         hint: 'Hint: This field is required',
         required: true
       };
       const componentOptions = {
         ...groupOptions,
         fieldId,
-        type: 'text',
+        type: 'autcomplete',
         value: value[fieldId] || '',
+        source: CountriesByName,
         onChange
       };
       return <FormGroup {...groupOptions}>
-        <TextInput {...componentOptions} />
+        <Autocomplete {...componentOptions} displayMenu="inline" />
       </FormGroup>;
     }}
   </Story>
