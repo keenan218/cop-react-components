@@ -1,11 +1,12 @@
 name: React.js Package
 
 on:
-    push:
-      branches:
-        - master
-  # release:
-  #   types: [created]
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -15,8 +16,31 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 12
-      - run: npm ci
-      - run: npm test
+      - run: cd packages/components
+      - run: rm -rf node_modules
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn test
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - run: cd packages/components
+      - run: rm -rf node_modules
+      - run: yarn install --frozen-lockfile
+      - run: yarn compile
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
 
   publish-gpr:
     needs: build
@@ -30,7 +54,10 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
-      - run: npm publish
+      - run: cd packages/components
+      - run: rm -rf node_modules
+      - run: yarn install --frozen-lockfile
+      - run: yarn compile
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
