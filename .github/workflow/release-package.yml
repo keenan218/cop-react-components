@@ -1,9 +1,9 @@
-name: React.js Package
+name: React publish to NPM
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 jobs:
