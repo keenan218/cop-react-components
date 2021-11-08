@@ -48,6 +48,9 @@
     "babel-loader": "8.1.0",
     "webpack": "4.44.2"
   },
+  "resolutions": {
+    "immer": "9.0.6"
+  },
   "main": "dist/index.js",
   "files": [
     "dist",
