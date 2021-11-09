@@ -1,5 +1,8 @@
+// Global imports
 import React from 'react';
 import { fireEvent, getByTestId, render } from '@testing-library/react';
+
+// Local imports
 import Radios, { DEFAULT_CLASS } from './Radios';
 
 describe('Radios', () => {

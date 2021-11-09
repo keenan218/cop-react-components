@@ -1,5 +1,8 @@
+// Global imports
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Local imports
 import Radio from './Radio';
 import { classBuilder } from '../utils/Utils';
 import './Radios.scss';

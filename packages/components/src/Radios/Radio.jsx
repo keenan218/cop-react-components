@@ -1,5 +1,8 @@
+// Global imports
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+
+// Local imports
 import Hint, { DEFAULT_CLASS as DEFAULT_HINT_CLASS } from '../Hint/Hint';
 import { DEFAULT_CLASS as DEFAULT_LABEL_CLASS } from '../Label/Label';
 import { classBuilder } from '../utils/Utils';
