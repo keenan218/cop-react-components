@@ -44,7 +44,7 @@ jobs:
         working-directory: ./packages/components
         run: yarn publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_API_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-gpr:
     needs: build
