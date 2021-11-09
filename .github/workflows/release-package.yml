@@ -3,11 +3,9 @@ name: React publish to NPM
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +27,7 @@ jobs:
         run: yarn compile
 
   publish-npm:
-    needs: build
+    needs: build_and_test
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -47,7 +45,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-gpr:
-    needs: build
+    needs: build_and_test
     runs-on: ubuntu-latest
     permissions:
       packages: write
