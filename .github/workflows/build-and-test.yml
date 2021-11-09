@@ -1,7 +1,10 @@
 name: Build and test
 
 on:
-  [push, pull_request]
+  # Trigger the workflow on any push or pull request.
+  push:
+  pull_request:
+
   # Allow this to be run manually from the actions tab
   workflow_dispatch:
 
