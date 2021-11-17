@@ -13,10 +13,16 @@ jobs:
         with:
           node-version: 12
           registry-url: 'https://registry.npmjs.org'
-      - run: cd packages/components
-      - run: rm -rf node_modules
-      - run: yarn install --frozen-lockfile
-      - run: yarn compile
-      - run: yarn publish
+      - name: Install dependencies
+        working-directory: ./packages/components
+        run: |
+          rm -rf node_modules
+          yarn install --frozen-lockfile
+      - name: Build package
+        working-directory: ./packages/components
+        run: yarn compile
+      - name: Publish package to npm
+        working-directory: ./packages/components
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
