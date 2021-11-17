@@ -11,6 +11,7 @@ import Label from './Label';
 import Link from './Link';
 import Panel from './Panel';
 import Radios, { Radio } from './Radios';
+import Readonly from './Readonly';
 import Tag from './Tag';
 import TextInput from './TextInput';
 import Utils from './utils/Utils';
@@ -31,6 +32,7 @@ export {
   Panel,
   Radio,
   Radios,
+  Readonly,
   StartButton,
   Tag,
   TextInput,

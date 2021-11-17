@@ -1,0 +1,44 @@
+<!-- Global imports -->
+import { Fragment } from 'react';
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<!-- Local imports -->
+import Details from '../Details';
+import Label from '../Label';
+import Readonly from './Readonly';
+import Tag from '../Tag';
+
+<Meta title="Internal/Readonly" id="D-Readonly" component={ Readonly } />
+
+# Readonly
+
+<p><Tag text="Internal" /></p>
+
+A readonly version of a component, displaying as plain text.
+
+<Canvas>
+  <Story name="Default">
+    <Fragment>
+      <Label id="readonly" required>Are you a civil servant?</Label>
+      <Readonly id="readonly">Yes</Readonly>
+    </Fragment>
+  </Story>
+</Canvas>
+
+<Details summary="Properties" className="no-indent">
+  <ArgsTable of={ Readonly } />
+</Details>
+
+# Variants
+## With markup
+
+<Canvas>
+  <Story name="Markup">
+    <Readonly>
+      <ol>
+        <li>Check your answers carefully</li>
+        <li>Don't make a mistake</li>
+      </ol>
+    </Readonly>
+  </Story>
+</Canvas>
