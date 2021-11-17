@@ -1,4 +1,4 @@
-name: Publish library to npm
+name: Publish cop-react-components to npm
 
 on:
   release:
