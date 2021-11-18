@@ -181,8 +181,8 @@ template looks like this: `'${label} (${value})'`.
       const clearValue = () => {
         setValue(null);
       };
-      const onChange = (item) => {
-        setValue(item);
+      const onChange = ({ target: { value } }) => {
+        setValue(value);
       };
       return (
         <form autoComplete="off">
