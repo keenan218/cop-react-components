@@ -21,6 +21,6 @@ jobs:
         run: yarn build-storybook
       - name: Deploy Storybook
         working-directory: ./packages/components
-        run: yarn deploy-storybook
+        run: yarn deploy-storybook -- --ci --host-token-env-variable=GITHUB_TOKEN
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
