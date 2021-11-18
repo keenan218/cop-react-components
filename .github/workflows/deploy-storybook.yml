@@ -18,9 +18,9 @@ jobs:
           yarn install --frozen-lockfile
       - name: Build static Storybook
         working-directory: ./packages/components
-        run: yarn build-storybook
+        run: yarn build-storybook -o=.out
       - name: Deploy Storybook
         working-directory: ./packages/components
-        run: yarn deploy-storybook -- --ci --host-token-env-variable=GITHUB_TOKEN
+        run: yarn deploy-storybook -- --ci -e=.out
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
