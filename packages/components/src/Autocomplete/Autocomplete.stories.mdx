@@ -1,10 +1,13 @@
+<!-- Global imports -->
 import { useState, useEffect } from 'react';
-import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<!-- Local imports -->
 import Autocomplete, { RefDataAutocomplete } from './Autocomplete';
+import { Countries, CountriesAsRefData, CountriesByName } from './Countries.stories';
 import Details from '../Details';
 import Label from '../Label';
 import { interpolateString } from '../utils/Utils';
-import { Countries, CountriesAsRefData, CountriesByName } from './Countries.stories';
 import './Autocomplete.stories.scss';
 
 <Meta title="Autocomplete" id="D-Autocomplete" component={ Autocomplete } />
@@ -21,6 +24,7 @@ Make a page easier to scan by letting users reveal more detailed information onl
           <Label id="default-autocomplete">Find your country of birth</Label>
           <Autocomplete
             id="default-autocomplete"
+            fieldId="default-autocomplete"
             source={CountriesByName}
             displayMenu="inline"
             showAllValues
@@ -61,6 +65,7 @@ In this example, the data items take the form `{ "value": "GB", "label": "United
           <Label id="object-autocomplete">Find your country of birth</Label>
           <Autocomplete
             id="object-autocomplete"
+            fieldId="object-autocomplete"
             source={filterCountries}
             item={{ value: 'value', label: 'label' }}
             displayMenu="inline"
@@ -86,6 +91,7 @@ template looks like this: `'${label} (${value})'`.
           <Label id="formatted-autocomplete">Find your country of birth</Label>
           <Autocomplete
             id="formatted-autocomplete"
+            fieldId="formatted-autocomplete"
             source={Countries}
             item={{ value: 'value', label: 'label', format: TEMPLATE }}
             displayMenu="inline"
@@ -106,6 +112,7 @@ template looks like this: `'${label} (${value})'`.
           <Label id="error-autocomplete">Find your country of birth</Label>
           <Autocomplete
             id="error-autocomplete"
+            fieldId="error-autocomplete"
             source={CountriesByName}
             displayMenu="inline"
             error="Error"
@@ -126,6 +133,7 @@ template looks like this: `'${label} (${value})'`.
           <Label id="disabled-autocomplete">Find your country of birth</Label>
           <Autocomplete
             id="disabled-autocomplete"
+            fieldId="disabled-autocomplete"
             source={CountriesByName}
             displayMenu="inline"
             disabled
@@ -146,6 +154,7 @@ template looks like this: `'${label} (${value})'`.
           <Label id="disabled-error-autocomplete">Find your country of birth</Label>
           <Autocomplete
             id="disabled-error-autocomplete"
+            fieldId="disabled-error-autocomplete"
             source={CountriesByName}
             displayMenu="inline"
             disabled
@@ -180,6 +189,7 @@ template looks like this: `'${label} (${value})'`.
           <Label id="initial-autocomplete">Find your country of birth</Label>
           <Autocomplete
             id="initial-autocomplete"
+            fieldId="initial-autocomplete"
             item={{ value: 'value', label: 'label' }}
             source={Countries}
             value={value}
@@ -211,8 +221,35 @@ Reference data items include `id` and `name` properties: `{ "id": "GB", "name": 
           <Label id="refdata-autocomplete">Find your country of birth</Label>
           <RefDataAutocomplete
             id="refdata-autocomplete"
+            fieldId="refdata-autocomplete"
             source={CountriesAsRefData}
             displayMenu="inline"
+          />
+        </form>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Readonly
+
+<Canvas>
+  <Story name="Readonly">
+    {() => {
+      const [value, setValue] = useState(Countries.find(c => c.value === 'GB'));
+      // eslint-disable-next-line no-template-curly-in-string
+      const TEMPLATE = '${label} (${value})';
+      return (
+        <form autoComplete="off">
+          <Label id="readonly-autocomplete">Find your country of birth</Label>
+          <Autocomplete
+            id="readonly-autocomplete"
+            fieldId="readonly-autocomplete"
+            item={{ value: 'value', label: 'label', format: TEMPLATE }}
+            source={Countries}
+            value={value}
+            displayMenu="inline"
+            readonly
           />
         </form>
       );

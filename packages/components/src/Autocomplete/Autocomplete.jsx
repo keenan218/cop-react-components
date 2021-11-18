@@ -1,10 +1,14 @@
+// Global imports
 import React, { useEffect, useRef } from 'react'
 import { default as AlphaAutocomplete } from 'accessible-autocomplete/react';
 import PropTypes from 'prop-types';
+
+// Local imports
 import { getFilterFunction, getTemplates, setValue } from './Autocomplete.utils';
+import Readonly from '../Readonly';
+import TextInput from '../TextInput';
 import { concatClasses } from '../utils/Utils';
 import './Autocomplete.scss';
-import { TextInput } from '..';
 
 export const DEFAULT_CLASS = 'hods-autocomplete';
 const Autocomplete = ({
@@ -12,6 +16,7 @@ const Autocomplete = ({
   fieldId,
   disabled,
   error,
+  readonly,
   source,
   item,
   value,
@@ -39,6 +44,13 @@ const Autocomplete = ({
       onChange({ target: { name: fieldId, value } });
     }
   };
+  if (readonly) {
+    return (
+      <Readonly id={id} className={className} {...attrs}>
+        {templates.inputValue(value)}
+      </Readonly>
+    );
+  }
   return (
     <div className={`${DEFAULT_CLASS}__outer-wrapper ${className ?? ''}`}>
       {disabled && <TextInput
@@ -66,10 +78,11 @@ const Autocomplete = ({
 };
 
 Autocomplete.propTypes = {
-  id: PropTypes.string,
-  fieldId: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  fieldId: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   error: PropTypes.string,
+  readonly: PropTypes.bool,
   /** A list of items or a function that takes a query and callback method, which is called with the resultant list of items. */
   source: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.any), PropTypes.func]).isRequired,
   /** The structure of the item. If this is not provided, it is assumed to be a string. */
