@@ -2,11 +2,12 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "@storybook/storybook-deployer": "^2.8.10"
   },
   "scripts": {
     "storybook": "yarn --cwd packages/components storybook",
     "build-storybook": "yarn --cwd packages/components build-storybook",
+    "deploy-storybook": "yarn --cwd packages/components deploy-storybook",
     "clean": "yarn --cwd packages/components clean",
     "test": "yarn --cwd packages/components test",
     "lint": "yarn --cwd packages/components lint",
