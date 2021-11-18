@@ -1,6 +1,7 @@
 import React from 'react';
 import { fireEvent, getByTestId, render } from '@testing-library/react';
 import TextInput, { DEFAULT_CLASS } from './TextInput';
+import { DEFAULT_CLASS as DEFAULT_READONLY_CLASS } from '../Readonly';
 
 describe('TextInput', () => {
 
@@ -23,7 +24,7 @@ describe('TextInput', () => {
     expect(input.getAttribute('disabled')).toBeNull();
   });
 
-  it('should be accept the disabled flag', async () => {
+  it('should accept the disabled flag', async () => {
     const INPUT_ID = 'input';
     const INPUT_FIELD_ID = 'inputFieldId';
     const { container } = render(
@@ -31,6 +32,17 @@ describe('TextInput', () => {
     );
     const input = checkSetup(container, INPUT_ID);
     expect(input.getAttribute('disabled')).not.toBeNull();
+  });
+
+  it('should accept the readonly flag', async () => {
+    const INPUT_ID = 'input';
+    const INPUT_FIELD_ID = 'inputFieldId';
+    const { container } = render(
+      <TextInput data-testid={INPUT_ID} id={INPUT_ID} fieldId={INPUT_FIELD_ID} readonly={true} />
+    );
+    const input = getByTestId(container, INPUT_ID);
+    expect(input.tagName).toEqual('DIV');
+    expect(input.classList).toContain(DEFAULT_READONLY_CLASS);
   });
 
   it('should be in an error state when the error is set', async () => {
