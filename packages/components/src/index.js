@@ -5,6 +5,8 @@ import ButtonGroup from './ButtonGroup';
 import Details from './Details';
 import FormGroup from './FormGroup';
 import ErrorMessage from './ErrorMessage';
+import { ErrorSummary } from './ErrorSummary';
+import Heading, { LargeHeading, MediumHeading, SmallHeading, XLargeHeading } from './Heading';
 import Hint from './Hint';
 import InsetText from './InsetText';
 import Label from './Label';
@@ -25,19 +27,25 @@ export {
   ButtonGroup,
   Details,
   ErrorMessage,
+  ErrorSummary,
   FormGroup,
+  Heading,
   Hint,
   InsetText,
   Label,
+  LargeHeading,
   Link,
   Markup,
+  MediumHeading,
   Panel,
   Radio,
   Radios,
   Readonly,
+  SmallHeading,
   StartButton,
   Tag,
   TextInput,
   Utils,
-  VisuallyHidden
+  VisuallyHidden,
+  XLargeHeading
 };

@@ -30,6 +30,16 @@ describe('Markup', () => {
     expect(markup.tagName).toEqual(TAG_NAME.toUpperCase());
   });
 
+  it('should handle a void element', async () => {
+    const MARKUP_ID = 'markupId';
+    const TAG_NAME = 'hr';
+    const { container } = render(
+      <Markup data-testid={MARKUP_ID} tagName={TAG_NAME} />
+    );
+    const markup = getByTestId(container, MARKUP_ID);
+    expect(markup.tagName).toEqual(TAG_NAME.toUpperCase());
+  });
+
   it('should use the appropriate className', async () => {
     const MARKUP_ID = 'markupId';
     const TEXT = 'Hello World';
