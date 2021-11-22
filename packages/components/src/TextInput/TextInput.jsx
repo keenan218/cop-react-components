@@ -1,5 +1,9 @@
+// Global imports
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Local imports
+import Readonly from '../Readonly';
 import { classBuilder, toArray } from '../utils/Utils';
 import './TextInput.scss';
 
@@ -9,6 +13,7 @@ const TextInput = ({
   fieldId,
   disabled,
   error,
+  readonly,
   classBlock,
   classModifiers: _classModifiers,
   className,
@@ -16,6 +21,13 @@ const TextInput = ({
 }) => {
   const classModifiers = [...toArray(_classModifiers), error ? 'error' : undefined ];
   const classes = classBuilder(classBlock, classModifiers, className);
+  if (readonly) {
+    return (
+      <Readonly id={id} classModifiers={classModifiers} className={className} {...attrs}>
+        {attrs.value}
+      </Readonly>
+    );
+  }
   return (
     <input
       {...attrs}
@@ -33,6 +45,7 @@ TextInput.propTypes = {
   fieldId: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   error: PropTypes.string,
+  readonly: PropTypes.bool,
   classBlock: PropTypes.string,
   classModifiers: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   className: PropTypes.string

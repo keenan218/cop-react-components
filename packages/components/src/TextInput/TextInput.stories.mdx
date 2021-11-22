@@ -1,5 +1,8 @@
+<!-- Global imports -->
 import { useState } from 'react';
-import { Canvas, Meta, Props, Story } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<!-- Local imports -->
 import Details from '../Details';
 import TextInput from './TextInput';
 
@@ -14,7 +17,7 @@ import TextInput from './TextInput';
 </Canvas>
 
 <Details summary="Properties" className="no-indent">
-  <Props of={ TextInput } />
+  <ArgsTable of={ TextInput } />
 </Details>
 
 # Variants
@@ -35,6 +38,16 @@ A text input in an error state.
 <Canvas>
   <Story name="Error">
     <TextInput id="errorInput" fieldId="errorInput" error="This is an error" />
+  </Story>
+</Canvas>
+
+## Readonly
+
+A readonly "input".
+
+<Canvas>
+  <Story name="Readonly">
+    <TextInput id="readonlyInput" fieldId="readonlyInput" value="This is readonly text." readonly />
   </Story>
 </Canvas>
 
