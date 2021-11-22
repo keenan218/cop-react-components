@@ -1,6 +1,6 @@
 {
   "name": "@ukhomeoffice/cop-react-components",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": false,
   "scripts": {
     "storybook": "start-storybook -p 6006",
