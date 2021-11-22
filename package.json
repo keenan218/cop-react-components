@@ -5,6 +5,7 @@
     "@storybook/storybook-deployer": "^2.8.10"
   },
   "scripts": {
+    "postinstall": "yarn --cwd packages/components install",
     "storybook": "yarn --cwd packages/components storybook",
     "build-storybook": "yarn --cwd packages/components build-storybook",
     "deploy-storybook": "yarn --cwd packages/components deploy-storybook",

@@ -24,7 +24,7 @@ const FormGroup = ({
   return (
     <div {...attrs} key={id} className={classes()}>
       <Label id={id} required={required}>{label}</Label>
-      {hint && <Hint id={id}>{hint}</Hint>}
+      {hint && <Hint id={`${id}-hint`}>{hint}</Hint>}
       {error && <ErrorMessage id={`${id}-error`}>{error}</ErrorMessage>}
       {children}
     </div>
