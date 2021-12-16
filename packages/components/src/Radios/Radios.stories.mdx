@@ -397,6 +397,38 @@ Error messages should be styled like this:
 Make sure errors follow the guidance in error message and have specific error
 messages for specific error states.
 
+### Readonly
+
+A readonly rendering of the component, which shows only the label of the selected item
+without any of the other options. This can be used in a **Check your answers** pattern,
+for example.
+
+<Canvas>
+  <Story name="Readonly">
+    {() => {
+      const OPTIONS = [
+        { value: 'england', label: 'England' },
+        { value: 'scotland', label: 'Scotland' },
+        { value: 'wales', label: 'Wales' },
+        { value: 'northern-ireland', label: 'Northern Ireland' }
+      ];
+      const value = OPTIONS[0];
+      return (
+        <FormGroup
+          id="readonly"
+          label={<h1 className="govuk-heading-l">Where do you live?</h1>}>
+          <Radios
+            id="readonly-option"
+            fieldId="where-do-you-live-readonly"
+            options={OPTIONS}
+            readonly
+            value={value}
+          />
+        </FormGroup>
+      );
+    }}
+  </Story>
+</Canvas>
 
 #### If nothing is selected and the options are ‘yes’ and ‘no’
 
