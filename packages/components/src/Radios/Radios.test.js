@@ -4,6 +4,7 @@ import { fireEvent, getByTestId, render } from '@testing-library/react';
 
 // Local imports
 import Radios, { DEFAULT_CLASS } from './Radios';
+import { DEFAULT_CLASS as DEFAULT_READONLY_CLASS } from '../Readonly';
 
 describe('Radios', () => {
 
@@ -85,6 +86,18 @@ describe('Radios', () => {
     fireEvent.click(input);
     expect(CHANGE_EVENTS.length).toEqual(1);
     expect(CHANGE_EVENTS[0]).toEqual(OPTIONS[2].value);
+  });
+
+  it('should accept the readonly flag', async () => {
+    const ID = 'radio';
+    const FIELD_ID = 'fieldId';
+    const { container } = render(
+      <Radios data-testid={ID} id={ID} fieldId={FIELD_ID} options={OPTIONS} value={OPTIONS[0]} readonly={true} />
+    );
+    const radios = getByTestId(container, ID);
+    expect(radios.tagName).toEqual('DIV');
+    expect(radios.classList).toContain(DEFAULT_READONLY_CLASS);
+    expect(radios.innerHTML).toContain(OPTIONS[0].label);
   });
 
 });
