@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Local imports
 import Radio from './Radio';
+import Readonly from '../Readonly';
 import { classBuilder } from '../utils/Utils';
 import './Radios.scss';
 
@@ -11,6 +12,7 @@ export const DEFAULT_CLASS = 'govuk-radios';
 const Radios = ({
   id,
   fieldId,
+  readonly,
   options,
   value,
   onChange,
@@ -20,6 +22,15 @@ const Radios = ({
   ...attrs
 }) => {
   const classes = classBuilder(classBlock, classModifiers, className);
+  if (readonly) {
+    const selectedValue = typeof(value) === 'object' ? value?.value : value;
+    const selectedOption = options ? options.find(option => option.value === selectedValue) : undefined;
+    return (
+      <Readonly id={id} className={className} {...attrs}>
+        {selectedOption?.label}
+      </Readonly>
+    );
+  }
   return (
     <div id={id} className={classes()} onChange={onChange} {...attrs}>
       {options && options.map((option, index) => {
