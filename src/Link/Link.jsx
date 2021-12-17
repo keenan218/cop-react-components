@@ -26,7 +26,8 @@ Link.propTypes = {
 };
 
 Link.defaultProps = {
-  classBlock: DEFAULT_CLASS
+  classBlock: DEFAULT_CLASS,
+  classModifiers: []
 };
 
 export default Link;
