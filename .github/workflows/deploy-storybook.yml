@@ -12,15 +12,12 @@ jobs:
         with:
           node-version: 12
       - name: Install dependencies
-        working-directory: ./packages/components
         run: |
           rm -rf node_modules
           yarn install --frozen-lockfile
       - name: Build static Storybook
-        working-directory: ./packages/components
         run: yarn build-storybook -o .out
       - name: Deploy Storybook
-        working-directory: ./packages/components
         run: yarn deploy-storybook -- --ci -e=.out -t=GITHUB_TOKEN
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
