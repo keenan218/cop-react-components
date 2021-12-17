@@ -1,6 +1,14 @@
+// Global imports
 import { addons } from '@storybook/addons';
-import { themes } from '@storybook/theming';
+
+// Local imports
+import GovUKTheme from './govuk-theme';
 
 addons.setConfig({
-  theme: themes.dark
+  theme: GovUKTheme,
+  sidebar: {
+    showRoots: true
+  },
+  isToolshown: false,
+  initialActive: 'docs'
 });
