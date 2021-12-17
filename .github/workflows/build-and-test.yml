@@ -11,15 +11,12 @@ jobs:
         with:
           node-version: 12
       - name: Install dependencies
-        working-directory: ./packages/components
         run: |
           rm -rf node_modules
           yarn install --frozen-lockfile
       - name: Lint and test
-        working-directory: ./packages/components
         run: |
           yarn lint
           yarn test
       - name: Build package
-        working-directory: ./packages/components
         run: yarn compile
