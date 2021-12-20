@@ -32,6 +32,15 @@ Your components is ready to be deployed!
 
 See the section about [compile](https://babeljs.io/setup#installation) for more information.
 
+### `yarn build-storybook`
+Builds the storybook files ending in `.stories.mdx` to static HTML, CSS & JS files located in `storybook-static` folder.
+
+### `yarn deploy-storybook`
+Deploys the storybook build from the previous step to GitHub Pages. The storybook is deployed to special branch called `gh-pages`.\
+
+
+The changes will be publicly available on[Cop React Components Storybook](https://ukhomeoffice.github.io/cop-react-components)
+
 ## Learn More
 
 You can learn more in the [Introduction to Storybook for React](https://storybook.js.org/docs/react/get-started/introduction).
@@ -48,4 +57,4 @@ This section has moved here: [https://babeljs.io/docs/en/usage/#configuration](h
 
 ## To do
 
-- [ ] Deployment
+- [ ] How to deployment
