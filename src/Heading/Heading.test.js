@@ -13,7 +13,7 @@ describe('Heading', () => {
       <Heading data-testid={ID}>{TEXT}</Heading>
     );
     const heading = getByTestId(container, ID);
-    expect(heading.tagName).toEqual('H2');
+    expect(heading.tagName).toEqual('H1');
     expect(heading.innerHTML).toContain(TEXT);
     expect(heading.classList).toContain('govuk-heading-l');
   });
@@ -92,14 +92,14 @@ describe('XLargeHeading', () => {
 });
 
 describe('LargeHeading', () => {
-  it('should render as an h2 with an appropriate class', () => {
+  it('should render as an h1 with an appropriate class', () => {
     const ID = 'headingId';
     const TEXT = 'Heading text';
     const { container } = render(
       <LargeHeading data-testid={ID}>{TEXT}</LargeHeading>
     );
     const heading = getByTestId(container, ID);
-    expect(heading.tagName).toEqual('H2');
+    expect(heading.tagName).toEqual('H1');
     expect(heading.innerHTML).toContain(TEXT);
     expect(heading.classList).toContain('govuk-heading-l');
   });
@@ -111,7 +111,7 @@ describe('LargeHeading', () => {
       <LargeHeading data-testid={ID} caption={CAPTION}>{TEXT}</LargeHeading>
     );
     const heading = getByTestId(container, ID);
-    expect(heading.tagName).toEqual('H2');
+    expect(heading.tagName).toEqual('H1');
     expect(heading.innerHTML).toContain(TEXT);
     expect(heading.classList).toContain('govuk-heading-l');
     expect(heading.childNodes.length).toEqual(2);
@@ -123,14 +123,14 @@ describe('LargeHeading', () => {
 });
 
 describe('MediumHeading', () => {
-  it('should render as an h3 with an appropriate class', () => {
+  it('should render as an h2 with an appropriate class', () => {
     const ID = 'headingId';
     const TEXT = 'Heading text';
     const { container } = render(
       <MediumHeading data-testid={ID}>{TEXT}</MediumHeading>
     );
     const heading = getByTestId(container, ID);
-    expect(heading.tagName).toEqual('H3');
+    expect(heading.tagName).toEqual('H2');
     expect(heading.innerHTML).toContain(TEXT);
     expect(heading.classList).toContain('govuk-heading-m');
   });
@@ -142,7 +142,7 @@ describe('MediumHeading', () => {
       <MediumHeading data-testid={ID} caption={CAPTION}>{TEXT}</MediumHeading>
     );
     const heading = getByTestId(container, ID);
-    expect(heading.tagName).toEqual('H3');
+    expect(heading.tagName).toEqual('H2');
     expect(heading.innerHTML).toContain(TEXT);
     expect(heading.classList).toContain('govuk-heading-m');
     expect(heading.childNodes.length).toEqual(2);
