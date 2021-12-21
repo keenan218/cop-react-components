@@ -39,7 +39,7 @@ Builds the storybook files ending in `.stories.mdx` to static HTML, CSS & JS fil
 Deploys the storybook build from the previous step to GitHub Pages. The storybook is deployed to special branch called `gh-pages`.\
 
 
-The changes will be publicly available on[Cop React Components Storybook](https://ukhomeoffice.github.io/cop-react-components)
+The changes will be publicly available on [Cop React Components Storybook](https://ukhomeoffice.github.io/cop-react-components)
 
 ## Learn More
 
