@@ -1,3 +1,4 @@
+// Global imports
 import { createElement } from 'react';
 
 const Root = props => (
