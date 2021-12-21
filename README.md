@@ -57,4 +57,4 @@ This section has moved here: [https://babeljs.io/docs/en/usage/#configuration](h
 
 ## To do
 
-- [ ] How to deployment
+- [ ] How to deploy
