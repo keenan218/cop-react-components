@@ -21,8 +21,24 @@ A block of text that is inset.
   <Props of={ Alert } />
 </Details>
 
-# Variants
-## Success
+## When to use this component
+
+Use alerts to inform users that something important has happened, notify them of a success/failure or to take action.
+Only use this component when you have identified that users need to be made aware of certain content.
+
+## Variants
+
+### Standard alert
+
+<Canvas>
+  <Story name="Standard">
+    <Alert heading="New passport">
+      We'll send your new passport by secure delivery. The cost is included in the passport fee.
+    </Alert>
+  </Story>
+</Canvas>
+
+### Success
 
 Use the green version of the alert to confirm that something they’re expecting to happen has happened.
 
@@ -34,7 +50,7 @@ Use the green version of the alert to confirm that something they’re expecting
   </Story>
 </Canvas>
 
-## Error
+### Error
 
 Use the red version of the alert to confirm that something has gone wrong.
 
