@@ -28,7 +28,7 @@ Builds the components for production to the `dist` folder.\
 It correctly bundles React components in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
-Your components is ready to be deployed!
+Your components are ready to be deployed!
 
 See the section about [compile](https://babeljs.io/setup#installation) for more information.
 
