@@ -1,6 +1,8 @@
 // Global imports
 import { DocsContainer, DocsPage } from '@storybook/addon-docs';
 import { addDecorator, addParameters } from '@storybook/react';
+import prettier from 'prettier/standalone';
+import prettierBabel from 'prettier/parser-babel';
 
 // Local imports
 import globalDecorator from './decorators';
@@ -10,7 +12,12 @@ addParameters({
   docs: {
     container: DocsContainer,
     page: DocsPage,
-    theme: GovUKTheme
+    theme: GovUKTheme,
+    transformSource: input =>
+    prettier.format(input, {
+      parser: 'babel',
+      plugins: [prettierBabel],
+    }),
   },
   previewTabs: { canvas: { hidden: true } },
   toolbar: {
