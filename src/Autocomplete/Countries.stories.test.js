@@ -22,3 +22,7 @@ const setupCountries = () => {
 };
 
 setupCountries();
+
+it('should be a function', () => {
+  expect(typeof setupCountries).toEqual('function');
+});

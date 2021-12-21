@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Markup from '../Markup';
 import './Heading.scss';
 
-const TAGS = { xl: 'h1', l: 'h2', m: 'h3', s: 'h3' };
+const TAGS = { xl: 'h1', l: 'h1', m: 'h2', s: 'h3' };
 
 const getProps = (size) => {
   const tagName = TAGS[size] || TAGS.l;

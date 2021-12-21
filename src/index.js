@@ -1,5 +1,6 @@
 import Alert from './Alert';
 import Autocomplete from './Autocomplete';
+import BackLink from './BackLink';
 import Button, { StartButton } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Details from './Details';
@@ -23,6 +24,7 @@ import VisuallyHidden from './VisuallyHidden';
 export {
   Alert,
   Autocomplete,
+  BackLink,
   Button,
   ButtonGroup,
   Details,
