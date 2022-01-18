@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Canvas, Meta, Props, Story } from '@storybook/addon-docs';
+
+<!-- Local imports -->
 import Details from '../Details';
 import InsetText from './InsetText';
+import Link from '../Link';
 
 <Meta title="InsetText" id="D-InsetText" component={ InsetText } />
 
@@ -33,6 +36,35 @@ A block of markup that is inset, showing it supports something other than plain 
         <li>Check your answers carefully</li>
         <li>Don't make a mistake</li>
       </ol>
+    </InsetText>
+  </Story>
+</Canvas>
+
+
+## When to use this component
+Use the inset text component to differentiate a block of text from the content that surrounds it, for example:
+
+- quotes
+- examples
+- additional information about the page
+
+## When not to use this component
+Some users do not notice inset text if it’s used on complex pages or near to other visually prominent elements.
+For this reason, avoid using inset text as a way of highlighting very important information that users need to see.
+
+If you need to draw attention to very important content, like legal information, use the <Link href="/?path=/docs/d-warningtext--default-story">warning text component</Link> instead.
+
+
+## How it works
+Use inset text very sparingly - it’s less effective if it’s overused.
+
+There are 2 ways to use the inset text component. You can use HTML or, if you’re using Nunjucks or the GOV.UK Prototype Kit, you can use the Nunjucks macro.
+
+
+<Canvas>
+  <Story name="Default2">
+    <InsetText>
+      The changes will show in your profile when they accept your request.
     </InsetText>
   </Story>
 </Canvas>
