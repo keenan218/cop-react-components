@@ -3,6 +3,7 @@ import Autocomplete from './Autocomplete';
 import BackLink from './BackLink';
 import Button, { StartButton } from './Button';
 import ButtonGroup from './ButtonGroup';
+import Checkboxes from './Checkboxes';
 import Details from './Details';
 import FormGroup from './FormGroup';
 import ErrorMessage from './ErrorMessage';
@@ -27,6 +28,7 @@ export {
   BackLink,
   Button,
   ButtonGroup,
+  Checkboxes,
   Details,
   ErrorMessage,
   ErrorSummary,
