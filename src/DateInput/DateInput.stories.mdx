@@ -8,6 +8,7 @@ import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 import Details from '../Details';
 import FormGroup from '../FormGroup';
 import DateInput from './DateInput';
+import TextInput from '../TextInput/TextInput';
 
 <Meta id='D-DateInput' title='DateInput' component={DateInput} />
 
@@ -24,7 +25,7 @@ import DateInput from './DateInput';
             <h1 className='govuk-heading-l'>When was your passport issued?</h1>
           }
         >
-          <DateInput id='dateinput' name='dateinput' />
+          <DateInput id='dateinput' fieldId='dateinput' />
         </FormGroup>
       );
     }}
@@ -70,8 +71,32 @@ If you're asking more than one question on the page, do not set the contents of 
       label='When was your passport issued?'
       hint='For example, 27 3 2007'
     >
-      <DateInput id='standard' name='standard' />
+      <DateInput id='standard' fieldId='standard' />
     </FormGroup>
+  </Story>
+</Canvas>
+
+## Read only
+
+<Canvas>
+  <Story name='DateInputReadOnly'>
+    {() => {
+      return (
+        <FormGroup
+          id='dateinput'
+          label={
+            <h1 className='govuk-heading-l'>When was your passport issued?</h1>
+          }
+        >
+          <DateInput
+            id='dateinputreadonly'
+            fieldId='dateinputreadonly'
+            value={{ day: 6, month: 3, year: 2022 }}
+            readonly
+          />
+        </FormGroup>
+      );
+    }}
   </Story>
 </Canvas>
 
@@ -79,7 +104,7 @@ If you're asking more than one question on the page, do not set the contents of 
 
 If you're highlighting the whole date, style all the fields like this:
 
-<Canvas >
+<Canvas>
   <Story name='DateInputError'>
     {() => {
       return (
@@ -91,7 +116,12 @@ If you're highlighting the whole date, style all the fields like this:
             <h1 className='govuk-heading-l'>When was your passport issued?</h1>
           }
         >
-          <DateInput id='dateinput' name='dateinput' day={6} month={3} year={2076} error={{"year" : true, "month" : true, "day" : true}} />
+          <DateInput
+            id='dateinputerror'
+            fieldId='dateinputerror'
+            value={{ day: 6, month: 3, year: 2076 }}
+            error={{ year: true, month: true, day: true }}
+          />
         </FormGroup>
       );
     }}
@@ -100,7 +130,7 @@ If you're highlighting the whole date, style all the fields like this:
 
 If you're highlighting just one field - either the day, month or year - only style the field that has an error. The error message must say which field has an error, like this:
 
-<Canvas >
+<Canvas>
   <Story name='DateInputMissingYear'>
     {() => {
       return (
@@ -112,7 +142,12 @@ If you're highlighting just one field - either the day, month or year - only sty
             <h1 className='govuk-heading-l'>When was your passport issued?</h1>
           }
         >
-          <DateInput id='dateinput' name='dateinput' day={6} month={3} error={{"year" : true}} />
+          <DateInput
+            id='dateinputmissingyear'
+            fieldId='dateinputmissingyear'
+            value={{ day: 6, month: 3 }}
+            error={{ year: true }}
+          />
         </FormGroup>
       );
     }}
@@ -128,11 +163,13 @@ If there's more than one error, show the highest priority error message. In orde
 - information that fails validation for another reason
 
 ### If nothing is entered
+
 Highlight the date input as a whole.
 
 Say 'Enter [whatever it is]'. For example, 'Enter your date of birth'.
 
 ### If the date is incomplete
+
 Highlight the day, month or year field where the information is missing. If more than one field is missing information, highlight the date input as a whole.
 
 Say '[whatever it is] must include a [whatever is missing]'.
@@ -140,6 +177,7 @@ Say '[whatever it is] must include a [whatever is missing]'.
 For example, 'Date of birth must include a month' or 'Date of birth must include a day and month'.
 
 ### If the date entered cannot be correct
+
 For example, '13' in the month field cannot be correct.
 
 Highlight the day, month or year field with the incorrect information. Or highlight the date as a whole if there's incorrect information in more than one field, or it's not clear which field is incorrect.
@@ -147,46 +185,55 @@ Highlight the day, month or year field with the incorrect information. Or highli
 Say '[Whatever it is] must be a real date'. For example, 'Date of birth must be a real date'.
 
 ### If the date is in the future when it needs to be in the past
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be in the past'. For example, 'Date of birth must be in the past'.
 
 ### If the date is in the future when it needs to be today or in the past
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be today or in the past'. For example, 'Date of birth must be today or in the past'.
 
 ### If the date is in the past when it needs to be in the future
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be in the future'. For example, 'The date your course ends must be in the future'.
 
 ### If the date is in the past when it needs to be today or in the future
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be today or in the future'. For example, 'The date your course ends must be today or in the future'.
 
 ### If the date must be the same as or after another date
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be the same as or after [date and optional description]'. For example, 'The date your course ends must be the same as or after 1 September 2017 when you started the course'.
 
 ### If the date must be after another date
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be after [date and optional description]'. For example, 'The day your course ends must be after 1 September 2017'.
 
 ### If the date must be the same as or before another date
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be the same as or before [date and optional description]'. For example, 'The date of Gordon's last exam must be the same as or before 31 August 2017 when they left school'.
 
 ### If the date must be before another date
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be before [date and optional description]'. For example, 'The date of Gordon's last exam must be the same as or before 31 August 2017'.
 
 ### If the date must be between two dates
+
 Highlight the date input as a whole.
 
 Say '[whatever it is] must be between [date] and [date and optional description]'. For example, 'The date your contract started must be between 1 September 2017 and 30 September 2017 when you were self-employed'.
