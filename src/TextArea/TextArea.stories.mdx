@@ -1,0 +1,122 @@
+<!-- Global imports -->
+import { useState } from 'react';
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
+
+<!-- Local imports -->
+import Details from '../Details';
+import TextArea from './TextArea';
+import Link from '../Link';
+
+<Meta title="Text area" id="D-TextArea" component={ TextArea } />
+
+# Text input
+
+<Canvas>
+  <Story name="Default">
+    <TextArea id="input" fieldId="input" />
+  </Story>
+</Canvas>
+
+<Details summary="Properties" className="no-indent">
+  <ArgsTable of={ TextArea } />
+</Details>
+
+# Variants
+## Disabled
+
+A disabled text input.
+
+<Canvas>
+  <Story name="Disabled">
+    <TextArea id="disabledInput" fieldId="disabledInput" disabled={true} />
+  </Story>
+</Canvas>
+
+## Error
+
+A text input in an error state.
+
+<Canvas>
+  <Story name="Error">
+    <TextArea id="errorInput" fieldId="errorInput" error="This is an error" />
+  </Story>
+</Canvas>
+
+## Readonly
+
+A readonly "input".
+
+<Canvas>
+  <Story name="Readonly">
+    <TextArea id="readonlyInput" fieldId="readonlyInput" value="This is readonly text." readonly />
+  </Story>
+</Canvas>
+
+## Track changes
+
+A text input with an `onChange` handler that tracks changes as you type.
+
+<Canvas>
+  <Story name="Track changes">
+    {() => {
+      const [value, setValue] = useState({});
+      const [changes, setChanges] = useState([]);
+      const onChange = ({ target }) => {
+        setValue(prev => {
+          const next = { ...prev, [target.name]: target.value };
+          setChanges(prevChanges => {
+            return [...prevChanges, { ts: Date.now(), value: next }];
+          });
+          return next;
+        });
+      };
+      const fieldId = 'textInput';
+      const options = {
+        id: 'textInput',
+        fieldId,
+        value: value[fieldId] || '',
+        onChange
+      };
+      return (
+        <>
+          <TextArea {...options} />
+          {changes && 
+            <>
+              <br /><br />
+              <Details summary="Change series" className="no-indent">
+                <ol>
+                  {changes && changes.map(change => (
+                    <li key={change.ts}>{JSON.stringify(change.value)}</li>
+                  ))}
+                </ol>
+              </Details>
+            </>
+          }
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+
+## When to use this component
+Use the text input component when you need to let users enter text that’s no longer than a single line, such as their name or phone number.
+
+## When not to use this component
+Do not use the text input component if you need to let users enter longer answers that might span multiple lines. In this case, you should use the textarea component.
+
+## How it works
+All text inputs must have visible labels; placeholder text is not an acceptable replacement for a label as it vanishes when users start typing.
+
+Labels should be aligned above the text input they refer to. They should be short, direct and written in sentence case. Do not use colons at the end of labels.
+
+If you’re asking just <Link href="https://design-system.service.gov.uk/patterns/question-pages/#start-by-asking-one-question-per-page">one question per page</Link> 
+as recommended, you can set the contents of the `<label>` as the page heading. This is good practice as it means that users of screen readers will only hear the contents once.
+
+Read more about <Link href="https://design-system.service.gov.uk/get-started/labels-legends-headings/">why and how to set legends as headings</Link>.
+
+<Canvas>
+  <Story name="Default2">
+    <TextArea id="input" fieldId="input" />
+  </Story>
+</Canvas>
