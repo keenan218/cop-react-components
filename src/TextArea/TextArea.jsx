@@ -1,6 +1,6 @@
 // Global imports
-import React from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 
 // Local imports
 import Readonly from '../Readonly';
@@ -12,7 +12,7 @@ export const DEFAULT_CLASS = 'govuk-textarea';
 const TextArea = ({
   id,
   fieldId,
-  rows,
+  rows: _rows,
   disabled,
   error,
   readonly,
@@ -21,6 +21,11 @@ const TextArea = ({
   className,
   ...attrs
 }) => {
+  const [rows, setRows] = useState(DEFAULT_ROWS);
+  useEffect(() => {
+    const rowsNumber = parseInt(_rows, 10);
+    setRows(isNaN(rowsNumber) ? DEFAULT_ROWS : rowsNumber);
+  }, [_rows, setRows]);
   const classModifiers = [...toArray(_classModifiers), error ? 'error' : undefined ];
   const classes = classBuilder(classBlock, classModifiers, className);
   if (readonly) {
@@ -45,7 +50,7 @@ const TextArea = ({
 TextArea.propTypes = {
   id: PropTypes.string.isRequired,
   fieldId: PropTypes.string.isRequired,
-  rows: PropTypes.number.isRequired,
+  rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   disabled: PropTypes.bool,
   error: PropTypes.string,
   readonly: PropTypes.bool,
