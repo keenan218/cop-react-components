@@ -1,11 +1,12 @@
 // Global Imports
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Local imports
-import { DEFAULT_CLASS as DEFAULT_LABEL_CLASS } from '../Label/Label';
 import { classBuilder } from '../utils/Utils';
 import './DateInput.scss';
-import TextInput from '../TextInput/TextInput';
+import TextInput from '../TextInput';
+import Label from '../Label';
 import Readonly from '../Readonly';
 
 export const DEFAULT_CLASS = 'govuk-date-input';
@@ -23,74 +24,80 @@ const DateInput = ({
 }) => {
   const classes = classBuilder(classBlock, classModifiers, className);
 
+  const convertMonth = (monthNum) => {
+    return [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ][monthNum - 1];
+  };
+
   if (readonly) {
     return (
-      <div id={id} {...attrs}>
-        <div className={classes('item')}>
-          <label className={`${DEFAULT_LABEL_CLASS} ${classes('label')}`} htmlFor={`${id}-day`}>
-            Day
-          </label>
-          <Readonly id={`${id}-day`}>{value?.day}</Readonly>
-        </div>
-        <div className={classes('item')}>
-          <label className={`${DEFAULT_LABEL_CLASS} ${classes('label')}`} htmlFor={`${id}-month`}>
-            Month
-          </label>
-          <Readonly id={`${id}-month`}>{value?.month}</Readonly>
-        </div>
-        <div className={classes('item')}>
-          <label className={`${DEFAULT_LABEL_CLASS} ${classes('label')}`} htmlFor={`${id}-year`}>
-            Year
-          </label>
-          <Readonly id={`${id}-year`}>{value?.year}</Readonly>
-        </div>
-      </div>
+      <Readonly id={id} classModifiers={classModifiers} className={className} {...attrs}>
+        {value?.day} {value?.month ? convertMonth(value.month) : ''} {value?.year}
+      </Readonly>
     );
   }
 
   return (
     <div className={DEFAULT_CLASS} id={id} {...attrs}>
       <div className={classes('item')}>
-        <label className={`${DEFAULT_LABEL_CLASS} ${classes('label')}`} htmlFor={`${id}-day`}>
+        <Label id={`${id}-day-label`} className={`${classes('label')}`} htmlFor={`${id}-day`} required>
           Day
-        </label>
+        </Label>
         <TextInput
-          classBlock={`govuk-input ${classes('input')} govuk-input--width-2 ${
-            error?.day && 'govuk-input--error'
-          }`}
           id={`${id}-day`}
           fieldId={`${fieldId}-day`}
           value={value?.day}
           onChange={onChange}
-        ></TextInput>
+          pattern='[0-9]*'
+          inputMode='numeric'
+          error={error?.day ? 'error' : ''}
+          className={classes('input')}
+          classModifiers='width-2'
+        />
       </div>
       <div className={classes('item')}>
-        <label className={`${DEFAULT_LABEL_CLASS} ${classes('label')}`} htmlFor={`${id}-month`}>
+        <Label id={`${id}-month-label`} className={`${classes('label')}`} htmlFor={`${id}-month`} required>
           Month
-        </label>
+        </Label>
         <TextInput
-          classBlock={`govuk-input ${classes('input')} govuk-input--width-2 ${
-            error?.month && 'govuk-input--error'
-          }`}
           id={`${id}-month`}
           fieldId={`${fieldId}-month`}
           value={value?.month}
           onChange={onChange}
-        ></TextInput>
+          pattern='[0-9]*'
+          inputMode='numeric'
+          error={error?.month ? 'error' : ''}
+          className={classes('input')}
+          classModifiers='width-2'
+        />
       </div>
       <div className={classes('item')}>
-        <label className={`${DEFAULT_LABEL_CLASS} ${classes('label')}`} htmlFor={`${id}-year`}>
+        <Label id={`${id}-year-label`} className={`${classes('label')}`} htmlFor={`${id}-year`} required>
           Year
-        </label>
+        </Label>
         <TextInput
-          classBlock={`govuk-input ${classes('input')} govuk-input--width-4 ${
-            error?.year && 'govuk-input--error'
-          }`}
           id={`${id}-year`}
           fieldId={`${fieldId}-year`}
           value={value?.year}
           onChange={onChange}
-        ></TextInput>
+          pattern='[0-9]*'
+          inputMode='numeric'
+          error={error?.year ? 'error' : ''}
+          className={classes('input')}
+          classModifiers='width-4'
+        />
       </div>
     </div>
   );

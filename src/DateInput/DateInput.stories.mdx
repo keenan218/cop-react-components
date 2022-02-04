@@ -8,7 +8,6 @@ import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 import Details from '../Details';
 import FormGroup from '../FormGroup';
 import DateInput from './DateInput';
-import TextInput from '../TextInput/TextInput';
 
 <Meta id='D-DateInput' title='DateInput' component={DateInput} />
 
@@ -107,6 +106,22 @@ If you're highlighting the whole date, style all the fields like this:
 <Canvas>
   <Story name='DateInputError'>
     {() => {
+      const ID='dateinputerror';
+      const [value, setValue] = useState({
+        day: 6, month: 3, year: 2076
+      });      
+      const onChange = (event) => {
+        const id = event.target.id;
+        if(id === `${ID}-day`){
+          setValue((prev) => ({...prev, day: event.target.value}))
+        }
+        if(id === `${ID}-month`){
+          setValue((prev) => ({...prev, month: event.target.value}))
+        }
+        if(id === `${ID}-year`){
+          setValue((prev) => ({...prev, year: event.target.value}))
+        }
+      }
       return (
         <FormGroup
           id='dateinput'
@@ -117,10 +132,11 @@ If you're highlighting the whole date, style all the fields like this:
           }
         >
           <DateInput
-            id='dateinputerror'
-            fieldId='dateinputerror'
-            value={{ day: 6, month: 3, year: 2076 }}
+            id={ID}
+            fieldId={ID}
+            value={value}
             error={{ year: true, month: true, day: true }}
+            onChange={(event) => onChange(event)}
           />
         </FormGroup>
       );
@@ -133,6 +149,22 @@ If you're highlighting just one field - either the day, month or year - only sty
 <Canvas>
   <Story name='DateInputMissingYear'>
     {() => {
+      const ID='dateinputmissingyear';
+      const [value, setValue] = useState({
+        day: 6, month: 3
+      });      
+      const onChange = (event) => {
+        const id = event.target.id;
+        if(id === `${ID}-day`){
+          setValue((prev) => ({...prev, day: event.target.value}))
+        }
+        if(id === `${ID}-month`){
+          setValue((prev) => ({...prev, month: event.target.value}))
+        }
+        if(id === `${ID}-year`){
+          setValue((prev) => ({...prev, year: event.target.value}))
+        }
+      }
       return (
         <FormGroup
           id='dateinput'
@@ -143,10 +175,11 @@ If you're highlighting just one field - either the day, month or year - only sty
           }
         >
           <DateInput
-            id='dateinputmissingyear'
-            fieldId='dateinputmissingyear'
-            value={{ day: 6, month: 3 }}
+            id={ID}
+            fieldId={ID}
+            value={value}
             error={{ year: true }}
+            onChange={(event) => onChange(event)}
           />
         </FormGroup>
       );

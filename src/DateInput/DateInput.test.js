@@ -1,9 +1,11 @@
 // Global imports
+import React from 'react';
 import { fireEvent, getByTestId, render } from '@testing-library/react';
 
 // Local imports
 import DateInput, { DEFAULT_CLASS } from './DateInput';
 import { DEFAULT_CLASS as DEFAULT_LABEL_CLASS } from '../Label/Label';
+import { DEFAULT_CLASS as DEFAULT_READONLY_CLASS } from '../Readonly';
 
 describe('DateInput', () => {
   const checkSetup = (container, testId) => {
@@ -143,47 +145,28 @@ describe('DateInput', () => {
         readonly
       />
     );
-    const wrapper = checkSetup(container, ID);
+    const input = checkSetup(container, ID);
+    expect(input.tagName).toEqual('DIV');
+    expect(input.classList).toContain(DEFAULT_READONLY_CLASS);
+    expect(input.textContent).toEqual('6 March 2076');
+  });
 
-    expect(wrapper.childNodes.length).toEqual(3); // 3 for day, month, year
-
-    //day
-    const day = wrapper.childNodes[0];
-    expect(day.classList).toContain(`${DEFAULT_CLASS}__item`);
-
-    const dayLabel = day.childNodes[0];
-    expect(dayLabel.classList).toContain(DEFAULT_LABEL_CLASS);
-    expect(dayLabel.textContent).toEqual('Day');
-
-    const dayReadOnly = day.childNodes[1];
-    expect(dayReadOnly.classList).toContain('hods-readonly');
-    expect(dayReadOnly.id).toEqual(`${ID}-day`);
-    expect(dayReadOnly.textContent).toEqual('6');
-
-    //month
-    const month = wrapper.childNodes[1];
-    expect(month.classList).toContain(`${DEFAULT_CLASS}__item`);
-
-    const monthLabel = month.childNodes[0];
-    expect(monthLabel.classList).toContain(DEFAULT_LABEL_CLASS);
-    expect(monthLabel.textContent).toEqual('Month');
-
-    const monthReadOnly = month.childNodes[1];
-    expect(monthReadOnly.classList).toContain('hods-readonly');
-    expect(monthReadOnly.id).toEqual(`${ID}-month`);
-    expect(monthReadOnly.textContent).toEqual('3');
-
-    //year
-    const year = wrapper.childNodes[2];
-    expect(year.classList).toContain(`${DEFAULT_CLASS}__item`);
-
-    const yearLabel = year.childNodes[0];
-    expect(yearLabel.classList).toContain(DEFAULT_LABEL_CLASS);
-    expect(yearLabel.textContent).toEqual('Year');
-
-    const yearReadOnly = year.childNodes[1];
-    expect(yearReadOnly.classList).toContain('hods-readonly');
-    expect(yearReadOnly.id).toEqual(`${ID}-year`);
-    expect(yearReadOnly.textContent).toEqual('2076');
+  it('should convert month number values to the word equivalent', async () => {
+    const ID = 'dateinput';
+    const FIELD_ID = 'dateinputId';
+    let MONTH = 7;
+    const { container } = render(
+      <DateInput
+        data-testid={ID}
+        id={ID}
+        fieldId={FIELD_ID}
+        value={{ day: 6, month: MONTH, year: 2076 }}
+        readonly
+      />
+    );
+    const input = checkSetup(container, ID);
+    expect(input.tagName).toEqual('DIV');
+    expect(input.classList).toContain(DEFAULT_READONLY_CLASS);
+    expect(input.textContent).toEqual('6 July 2076');
   });
 });
