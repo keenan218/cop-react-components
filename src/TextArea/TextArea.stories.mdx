@@ -3,17 +3,26 @@ import { useState } from 'react';
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 
 <!-- Local imports -->
+import Alert from '../Alert';
 import Details from '../Details';
+import FormGroup from '../FormGroup';
+import Heading from '../Heading';
 import TextArea from './TextArea';
 import Link from '../Link';
 
 <Meta title="Text area" id="D-TextArea" component={ TextArea } />
 
-# Text input
+<Heading size="xl" caption="Components">Text area</Heading>
 
 <Canvas>
   <Story name="Default">
-    <TextArea id="input" fieldId="input" />
+    <FormGroup
+      id="default"
+      label={<Heading size="l">Can you provide more detail?</Heading>}
+      hint="Do not include personal or financial information, like your National Insurance number or credit card details."
+    >
+      <TextArea id="default" fieldId="default" />
+    </FormGroup>
   </Story>
 </Canvas>
 
@@ -21,102 +30,162 @@ import Link from '../Link';
   <ArgsTable of={ TextArea } />
 </Details>
 
-# Variants
-## Disabled
+# When to use this component
+Use the textarea component when you need to let users enter an amount of text that's longer than a single line.
 
-A disabled text input.
+# When not to use this component
+Users can find open-ended questions difficult to answer.
+It might be better to break up one complex question into a series of simple ones,
+for example where users can select from options using <Link href="./?path=/docs/d-radios--radios">radios</Link>.
+
+### If you need to ask an open question
+Do not use the textarea component if you need to let users enter shorter answers no longer than a single line,
+such as a phone number or name. In this case, you should use the <Link href="./?path=/docs/d-textinput--default-story">text input</Link>
+component.
+
+# How it works
+You must label textareas. Placeholder text is not a suitable substitute for a label,
+as it disappears when users click inside the textarea.
+
+Labels must be aligned above the textarea they refer to. They should be short,
+direct and written in sentence case. Do not use colons at the end of labels.
+
+<Alert heading="Labels and hints">
+Everything to do with labels and hints is handled by the <Link href="./?path=/docs/internal-form-group--default-story">form group</Link> component,
+rather than by the text area component itself.
+</Alert>
 
 <Canvas>
-  <Story name="Disabled">
-    <TextArea id="disabledInput" fieldId="disabledInput" disabled={true} />
+  <Story name="More detail">
+    <FormGroup
+      id="more-detail"
+      label={<Heading size="l">Can you provide more detail?</Heading>}
+      hint="Do not include personal or financial information, like your National Insurance number or credit card details."
+    >
+      <TextArea id="more-detail" fieldId="more-detail" />
+    </FormGroup>
   </Story>
 </Canvas>
 
-## Error
-
-A text input in an error state.
+## Use appropriately-sized textareas
+Make the height of a textarea proportional to the amount of text you expect users to enter.
+You can set the height of a textarea by by specifying the `rows` attribute. If you do not
+specify the `rows` attribute, it will default to 5 rows.
 
 <Canvas>
-  <Story name="Error">
-    <TextArea id="errorInput" fieldId="errorInput" error="This is an error" />
+  <Story name="More rows">
+    <FormGroup
+      id="more-rows"
+      label={<Heading size="l">Can you provide more detail?</Heading>}
+      hint="Do not include personal or financial information, like your National Insurance number or credit card details."
+    >
+      <TextArea id="more-rows" fieldId="more-rows" rows="8" />
+    </FormGroup>
   </Story>
 </Canvas>
 
-## Readonly
+### Do not disable copy and paste
+Users will often need to copy and paste information into a textarea, so do not stop them from doing this.
 
-A readonly "input".
+### If you're asking more than one question on the page
+If you're asking more than one question on the page, do not set the contents of the `<label>`
+as the page heading.
+Read more about <Link target="multiple-questions" href="https://design-system.service.gov.uk/patterns/question-pages/#asking-multiple-questions-on-a-page">asking multiple questions on question pages</Link>.
+
+<Canvas>
+  <Story name="Multiple questions">
+    <FormGroup
+      id="multiple-questions"
+      label="Can you provide more detail?"
+      required={true}
+    >
+      <TextArea id="multiple-questions" fieldId="multiple-questions" />
+    </FormGroup>
+  </Story>
+</Canvas>
+
+### Limiting the number of characters
+If there's a good reason to limit the number of characters users can enter, you can use
+the <Link target="character-count" href="https://design-system.service.gov.uk/components/character-count/">character count</Link> component.
+
+### Error messages
+Error messages should be styled like this:
+
+<Canvas>
+  <Story name="Error messages">
+    <FormGroup
+      id="error"
+      label={<Heading size="l">Can you provide more detail?</Heading>}
+      hint="Do not include personal or financial information, like your National Insurance number or credit card details."
+      required={true}
+      error="Enter more detail"
+    >
+      <TextArea id="error" fieldId="error" error="Enter more detail" />
+    </FormGroup>
+  </Story>
+</Canvas>
+
+Make sure errors follow the guidance in error message and have specific error messages for specific error states.
+
+### If the input is empty
+Say 'Enter [whatever it is]'.<br />
+For example, 'Enter summary'.
+
+### If the input is too long
+Say '[whatever it is] must be [number] characters or fewer'.<br />
+For example, 'Summary must be 400 characters or fewer'.
+
+### If the input is too short
+Say '[whatever it is] must be [number] characters or more'.<br />
+For example, 'Summary must be 10 characters or more'.
+
+### If the input is too long or too short
+Say '[whatever it is] must be between [number] and [number] characters'.<br />
+For example, 'Summary must be between 10 and 400 characters'.
+
+### If the input uses characters that are not allowed and you know what the characters are
+Say '[whatever it is] must not include [characters]'.<br />
+For example, 'Summary must not include è and £'.
+
+### If the input uses characters that are not allowed and you do not know what the characters are
+Say '[whatever it is] must only include [list of allowed characters]'.<br />
+For example, 'Summary must only include letters a to z, hyphens, spaces and apostrophes.
+
+# Other variants
+
+### Readonly
+Use a readonly "textarea" when you want to show the user what they have entered but do not
+want them to be able to edit the contents in that circumstance - for example,
+on a <Link target="check-answers" href="https://design-system.service.gov.uk/patterns/check-answers/">Check your answers</Link> page.
+
+<Alert heading="Compared to disabled components">
+You should prefer readonly variants over disabled ones, except where your user research specifically
+shows that disabled components aid user comprehension in your particular usage.
+</Alert>
 
 <Canvas>
   <Story name="Readonly">
-    <TextArea id="readonlyInput" fieldId="readonlyInput" value="This is readonly text." readonly />
+    <FormGroup
+      id="readonly"
+      label={<Heading size="l">Can you provide more detail?</Heading>}
+    >
+      <TextArea id="readonly" fieldId="readonly" readonly={true} value="Here is some content entered before it was made readonly." />
+    </FormGroup>
   </Story>
 </Canvas>
 
-## Track changes
-
-A text input with an `onChange` handler that tracks changes as you type.
-
-<Canvas>
-  <Story name="Track changes">
-    {() => {
-      const [value, setValue] = useState({});
-      const [changes, setChanges] = useState([]);
-      const onChange = ({ target }) => {
-        setValue(prev => {
-          const next = { ...prev, [target.name]: target.value };
-          setChanges(prevChanges => {
-            return [...prevChanges, { ts: Date.now(), value: next }];
-          });
-          return next;
-        });
-      };
-      const fieldId = 'textInput';
-      const options = {
-        id: 'textInput',
-        fieldId,
-        value: value[fieldId] || '',
-        onChange
-      };
-      return (
-        <>
-          <TextArea {...options} />
-          {changes && 
-            <>
-              <br /><br />
-              <Details summary="Change series" className="no-indent">
-                <ol>
-                  {changes && changes.map(change => (
-                    <li key={change.ts}>{JSON.stringify(change.value)}</li>
-                  ))}
-                </ol>
-              </Details>
-            </>
-          }
-        </>
-      );
-    }}
-  </Story>
-</Canvas>
-
-
-## When to use this component
-Use the text input component when you need to let users enter text that’s no longer than a single line, such as their name or phone number.
-
-## When not to use this component
-Do not use the text input component if you need to let users enter longer answers that might span multiple lines. In this case, you should use the textarea component.
-
-## How it works
-All text inputs must have visible labels; placeholder text is not an acceptable replacement for a label as it vanishes when users start typing.
-
-Labels should be aligned above the text input they refer to. They should be short, direct and written in sentence case. Do not use colons at the end of labels.
-
-If you’re asking just <Link href="https://design-system.service.gov.uk/patterns/question-pages/#start-by-asking-one-question-per-page">one question per page</Link> 
-as recommended, you can set the contents of the `<label>` as the page heading. This is good practice as it means that users of screen readers will only hear the contents once.
-
-Read more about <Link href="https://design-system.service.gov.uk/get-started/labels-legends-headings/">why and how to set legends as headings</Link>.
+### Disabled
+Use a disabled textarea only where your user research specifically shows that doing so aids user comprehension
+in your particular usage - otherwise, use the readonly variant.
 
 <Canvas>
-  <Story name="Default2">
-    <TextArea id="input" fieldId="input" />
+  <Story name="Disabled">
+    <FormGroup
+      id="disabled"
+      label={<Heading size="l">Can you provide more detail?</Heading>}
+      hint="Do not include personal or financial information, like your National Insurance number or credit card details."
+    >
+      <TextArea id="disabled" fieldId="disabled" disabled={true} value="Here is some content entered before it was disabled." />
+    </FormGroup>
   </Story>
 </Canvas>
