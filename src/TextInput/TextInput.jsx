@@ -14,6 +14,8 @@ const TextInput = ({
   disabled,
   error,
   readonly,
+  prefix,
+  suffix,
   classBlock,
   classModifiers: _classModifiers,
   className,
@@ -28,7 +30,10 @@ const TextInput = ({
       </Readonly>
     );
   }
-  return (
+
+  const useWrapper = !!(prefix || suffix);
+
+  const input = (
     <input
       {...attrs}
       disabled={disabled}
@@ -38,6 +43,25 @@ const TextInput = ({
       className={classes()}
     />
   );
+
+  if (useWrapper) {
+    return (
+      <div className={classes('wrapper')}>
+        {prefix && (
+          <div className={classes('prefix')} aria-hidden='true'>
+            {prefix}
+          </div>
+        )}
+        {input}
+        {suffix && (
+          <div className={classes('suffix')} aria-hidden='true'>
+            {suffix}
+          </div>
+        )}
+      </div>
+    );
+  };
+  return input;
 };
 
 TextInput.propTypes = {
@@ -46,6 +70,8 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.string,
   readonly: PropTypes.bool,
+  prefix: PropTypes.string,
+  suffix: PropTypes.string,
   classBlock: PropTypes.string,
   classModifiers: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   className: PropTypes.string

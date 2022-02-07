@@ -90,4 +90,26 @@ describe('TextInput', () => {
     expect(onChangeCalls).toEqual(1);
   });
 
+  it('should set up a suffix and prefix', async () => {
+    const INPUT_ID = 'input';
+    const INPUT_FIELD_ID = 'inputFieldId';
+    const PREFIX = '£';
+    const SUFFIX = 'kg';
+    const { container } = render(
+      <TextInput data-testid={INPUT_ID} id={INPUT_ID} fieldId={INPUT_FIELD_ID} prefix={PREFIX} suffix={SUFFIX}/>
+    );
+    const input = checkSetup(container, INPUT_ID);
+
+    const wrapper = input.parentNode;
+    expect(wrapper.classList).toContain('govuk-input__wrapper')
+
+    const prefix = wrapper.childNodes[0];
+    expect(prefix.classList).toContain('govuk-input__prefix')
+    expect(prefix.textContent).toEqual(PREFIX);
+
+    const suffix = wrapper.childNodes[2];
+    expect(suffix.classList).toContain('govuk-input__suffix')
+    expect(suffix.textContent).toEqual(SUFFIX);
+  });
+
 });
