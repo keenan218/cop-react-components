@@ -6,6 +6,7 @@ import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs';
 import Details from '../Details';
 import TextInput from './TextInput';
 import Link from '../Link';
+import FormGroup from '../FormGroup';
 
 <Meta title="Text input" id="D-TextInput" component={ TextInput } />
 
@@ -118,5 +119,68 @@ Read more about <Link href="https://design-system.service.gov.uk/get-started/lab
 <Canvas>
   <Story name="Default2">
     <TextInput id="input" fieldId="input" />
+  </Story>
+</Canvas>
+
+## Prefixes and Suffixes
+
+Use prefixes and suffixes to help users enter things like currencies and measurements.
+
+<Canvas>
+  <Story name='SuffixesAndPrefixes'>
+    <FormGroup
+      id='suffixprefixinput'
+      label={<h1 className='govuk-heading-l'>What is the cost per item, in pounds?</h1>}
+    >
+      <TextInput id='input' fieldId='input' prefix='£' suffix='per item' />
+    </FormGroup>
+  </Story>
+</Canvas>
+
+Prefixes and suffixes are useful when there's a commonly understood symbol or abbreviation for the type of information you're asking for. Do not rely on prefixes or suffixes alone, because screen readers will not read them out.
+
+If you need a specific type of information, say so in the input label or hint text as well. For example, put 'Cost, in pounds' in the input label and use the '£' symbol in the prefix.
+
+Position prefixes and suffixes so that they're outside of their input. This is to avoid interfering with some browsers that might insert an icon into the input (for example to show or generate a password).
+
+Some users may miss that the input already has a suffix or prefix, and enter a prefix or suffix into the input. Allow for this in your validation and do not show an error.
+
+### Text inputs with a prefix 
+
+<Canvas>
+  <Story name='Prefix'>
+    <FormGroup
+      id='prefixinput'
+      label={<h1 className='govuk-heading-l'>What is the cost in pounds?</h1>}
+    >
+      <TextInput id='input' fieldId='input' prefix='£'/>
+    </FormGroup>
+  </Story>
+</Canvas>
+
+### Text inputs with a prefix 
+
+<Canvas>
+  <Story name='Suffix'>
+    <FormGroup
+      id='suffixinput'
+      label={<h1 className='govuk-heading-l'>What is the weight in kilograms?</h1>}
+    >
+      <TextInput id='input' fieldId='input' suffix='kg'/>
+    </FormGroup>
+  </Story>
+</Canvas>
+
+### Text inputs with a prefix, suffix and error
+
+<Canvas>
+  <Story name='prefixsuffixerror'>
+    <FormGroup
+      id='suffixinput'
+      label={<h1 className='govuk-heading-l'>What is the weight in kilograms?</h1>}
+      error='Enter a cost per item, in pounds'
+    >
+      <TextInput id='input' fieldId='input'  prefix='£' suffix='per item'  error />
+    </FormGroup>
   </Story>
 </Canvas>
