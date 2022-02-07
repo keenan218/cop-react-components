@@ -14,11 +14,11 @@ const TextInput = ({
   disabled,
   error,
   readonly,
+  prefix,
+  suffix,
   classBlock,
   classModifiers: _classModifiers,
   className,
-  prefix,
-  suffix,
   ...attrs
 }) => {
   const classModifiers = [...toArray(_classModifiers), error ? 'error' : undefined ];
@@ -47,17 +47,17 @@ const TextInput = ({
   if (useWrapper) {
     return (
       <div className={classes('wrapper')}>
-        {prefix ? (
+        {prefix && (
           <div className={classes('prefix')} aria-hidden='true'>
             {prefix}
           </div>
-        ) : null}
+        )}
         {input}
-        {suffix ? (
+        {suffix && (
           <div className={classes('suffix')} aria-hidden='true'>
             {suffix}
           </div>
-        ) : null}
+        )}
       </div>
     );
   };
@@ -70,6 +70,8 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.string,
   readonly: PropTypes.bool,
+  prefix: PropTypes.string,
+  suffix: PropTypes.string,
   classBlock: PropTypes.string,
   classModifiers: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   className: PropTypes.string
