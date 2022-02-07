@@ -108,3 +108,9 @@ div[role="main"] > div {
 #docs-root .sbdocs.sbdocs-wrapper {
   padding-top: 1.75rem;
 }
+
+#docs-root .sbdocs-p {
+  font-size: 1.1875rem;
+  line-height: 1.31579;
+  margin-bottom: 20px;
+}
