@@ -4,6 +4,7 @@ import BackLink from './BackLink';
 import Button, { StartButton } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Checkboxes from './Checkboxes';
+import DateInput from './DateInput/DateInput';
 import Details from './Details';
 import FormGroup from './FormGroup';
 import ErrorMessage from './ErrorMessage';
@@ -29,6 +30,7 @@ export {
   Button,
   ButtonGroup,
   Checkboxes,
+  DateInput,
   Details,
   ErrorMessage,
   ErrorSummary,
