@@ -1,4 +1,5 @@
 // Global imports
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Local imports
